@@ -4,4 +4,4 @@ __py*
 .pyc
 make*.py*
 nbproject
-PSD.http_tasks.*
+pas_http_tasks.*

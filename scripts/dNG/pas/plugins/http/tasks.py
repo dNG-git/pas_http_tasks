@@ -36,12 +36,12 @@ http://www.direct-netware.de/redirect.py?licenses;gpl
 ----------------------------------------------------------------------------
 NOTE_END //n"""
 
-from dNG.pas.controller.predefined_http_request import direct_predefined_http_request
-from dNG.pas.data.http.virtual_config import direct_virtual_config
-from dNG.pas.data.logging.log_line import direct_log_line
-from dNG.pas.plugins.hooks import direct_hooks
+from dNG.pas.controller.predefined_http_request import PredefinedHttpRequest
+from dNG.pas.data.http.virtual_config import VirtualConfig
+from dNG.pas.data.logging.log_line import LogLine
+from dNG.pas.plugins.hooks import Hooks
 
-def direct_plugin_http_startup(params, last_return):
+def plugin_http_startup(params, last_return):
 #
 	"""
 Called for "dNG.pas.http.startup" and "dNG.pas.http.wsgi.startup"
@@ -52,11 +52,11 @@ Called for "dNG.pas.http.startup" and "dNG.pas.http.wsgi.startup"
 :since:  v0.1.00
 	"""
 
-	direct_virtual_config.set_virtual_path("/tasks/", { "uri": "tid", "uri_prefix": "/tasks/" }, direct_plugin_handle_http_request)
+	VirtualConfig.set_virtual_path("/tasks/", { "uri": "tid", "uri_prefix": "/tasks/" }, plugin_handle_http_request)
 	return last_return
 #
 
-def direct_plugin_handle_http_request(request, virtual_config):
+def plugin_handle_http_request(request, virtual_config):
 #
 	"""
 Called for requests with the path prefix "/tasks/".
@@ -69,13 +69,13 @@ Called for requests with the path prefix "/tasks/".
 	"""
 
 	tid = request.get_dsd("tid")
-	var_return = (None if (tid == None) else direct_hooks.call("dNG.pas.tasks.call", client = request.get_client_host(), tid = tid))
+	var_return = (None if (tid == None) else Hooks.call("dNG.pas.tasks.call", client = request.get_client_host(), tid = tid))
 
 	if (var_return == None):
 	#
-		direct_log_line.warning("pas.tasks refused TID '{0}'".format(tid))
+		LogLine.warning("pas.tasks refused TID '{0}'".format(tid))
 
-		var_return = direct_predefined_http_request()
+		var_return = PredefinedHttpRequest()
 		var_return.set_module("output")
 		var_return.set_service("http")
 		var_return.set_action("error")
@@ -93,8 +93,8 @@ Unregister plugin hooks.
 :since: v0.1.00
 	"""
 
-	direct_hooks.unregister("dNG.pas.http.startup", direct_plugin_http_startup)
-	direct_hooks.unregister("dNG.pas.http.wsgi.startup", direct_plugin_http_startup)
+	Hooks.unregister("dNG.pas.http.startup", plugin_http_startup)
+	Hooks.unregister("dNG.pas.http.wsgi.startup", plugin_http_startup)
 #
 
 def plugin_registration():
@@ -105,8 +105,8 @@ Register plugin hooks.
 :since: v0.1.00
 	"""
 
-	direct_hooks.register("dNG.pas.http.startup", direct_plugin_http_startup)
-	direct_hooks.register("dNG.pas.http.wsgi.startup", direct_plugin_http_startup)
+	Hooks.register("dNG.pas.http.startup", plugin_http_startup)
+	Hooks.register("dNG.pas.http.wsgi.startup", plugin_http_startup)
 #
 
 ##j## EOF
