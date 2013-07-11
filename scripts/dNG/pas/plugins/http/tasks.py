@@ -49,7 +49,7 @@ Called for "dNG.pas.http.startup" and "dNG.pas.http.wsgi.startup"
 :param params: Parameter specified
 :param last_return: The return value from the last hook called.
 
-:since:  v0.1.00
+:since: v0.1.00
 	"""
 
 	VirtualConfig.set_virtual_path("/tasks/", { "uri": "tid", "uri_prefix": "/tasks/" }, plugin_handle_http_request)
@@ -69,20 +69,20 @@ Called for requests with the path prefix "/tasks/".
 	"""
 
 	tid = request.get_dsd("tid")
-	var_return = (None if (tid == None) else Hooks.call("dNG.pas.tasks.call", client = request.get_client_host(), tid = tid))
+	_return = (None if (tid == None) else Hooks.call("dNG.pas.tasks.call", client = request.get_client_host(), tid = tid))
 
-	if (var_return == None):
+	if (_return == None):
 	#
 		LogLine.warning("pas.tasks refused TID '{0}'".format(tid))
 
-		var_return = PredefinedHttpRequest()
-		var_return.set_module("output")
-		var_return.set_service("http")
-		var_return.set_action("error")
-		var_return.set_dsd("code", "400")
+		_return = PredefinedHttpRequest()
+		_return.set_module("output")
+		_return.set_service("http")
+		_return.set_action("error")
+		_return.set_dsd("code", "400")
 	#
 
-	return var_return
+	return _return
 #
 
 def plugin_deregistration():
