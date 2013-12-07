@@ -2,7 +2,7 @@
 ##j## BOF
 
 """
-dNG.pas.plugins.http.tasks
+dNG.pas.plugins.http.pas_tasks
 """
 """n// NOTE
 ----------------------------------------------------------------------------
@@ -44,7 +44,7 @@ from dNG.pas.plugins.hooks import Hooks
 def plugin_http_startup(params, last_return):
 #
 	"""
-Called for "dNG.pas.http.startup" and "dNG.pas.http.wsgi.startup"
+Called for "dNG.pas.http.Server.startup" and "dNG.pas.http.Wsgi.startup"
 
 :param params: Parameter specified
 :param last_return: The return value from the last hook called.
@@ -69,7 +69,7 @@ Called for requests with the path prefix "/tasks/".
 	"""
 
 	tid = request.get_dsd("tid")
-	_return = (None if (tid == None) else Hooks.call("dNG.pas.tasks.call", client = request.get_client_host(), tid = tid))
+	_return = (None if (tid == None) else Hooks.call("dNG.pas.Tasks.call", client = request.get_client_host(), tid = tid))
 
 	if (_return == None):
 	#
@@ -93,8 +93,8 @@ Unregister plugin hooks.
 :since: v0.1.00
 	"""
 
-	Hooks.unregister("dNG.pas.http.startup", plugin_http_startup)
-	Hooks.unregister("dNG.pas.http.wsgi.startup", plugin_http_startup)
+	Hooks.unregister("dNG.pas.http.Server.startup", plugin_http_startup)
+	Hooks.unregister("dNG.pas.http.Wsgi.startup", plugin_http_startup)
 #
 
 def plugin_registration():
@@ -105,8 +105,8 @@ Register plugin hooks.
 :since: v0.1.00
 	"""
 
-	Hooks.register("dNG.pas.http.startup", plugin_http_startup)
-	Hooks.register("dNG.pas.http.wsgi.startup", plugin_http_startup)
+	Hooks.register("dNG.pas.http.Server.startup", plugin_http_startup)
+	Hooks.register("dNG.pas.http.Wsgi.startup", plugin_http_startup)
 #
 
 ##j## EOF
