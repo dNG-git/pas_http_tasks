@@ -73,7 +73,7 @@ Called for requests with the path prefix "/tasks/".
 
 	if (_return == None):
 	#
-		LogLine.warning("pas.tasks refused TID '{0}'".format(tid))
+		LogLine.warning("pas.Tasks refused TID '{0}'".format(tid))
 
 		_return = PredefinedHttpRequest()
 		_return.set_module("output")
