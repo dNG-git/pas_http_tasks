@@ -1,7 +1,7 @@
-_extras
 __py*
 .*
-.pyc
-make*.py*
+*.pyc
 nbproject
-pas_http_tasks.*
+/_extras
+/make*.py*
+/pas_http_tasks.*

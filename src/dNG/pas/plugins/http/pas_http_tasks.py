@@ -54,6 +54,8 @@ Called for requests with the path prefix "/tasks.d/".
 
 	# pylint: disable=broad-except
 
+	_return = None
+
 	tid = request.get_dsd("tid")
 
 	try:
@@ -63,11 +65,7 @@ Called for requests with the path prefix "/tasks.d/".
 		           DatabaseTasks.get_instance().call({ "client": request.get_client_host(), "tid": tid })
 		          )
 	#
-	except Exception as handled_exception:
-	#
-		LogLine.error(handled_exception, context = "pas_http_site")
-		_return = None
-	#
+	except Exception as handled_exception: LogLine.error(handled_exception, context = "pas_http_site")
 
 	if (_return == None):
 	#
@@ -92,6 +90,8 @@ Called for requests with the path prefix "/tasks.m/".
 
 	# pylint: disable=broad-except
 
+	_return = None
+
 	tid = request.get_dsd("tid")
 
 	try:
@@ -101,11 +101,7 @@ Called for requests with the path prefix "/tasks.m/".
 		           MemoryTasks.get_instance().call({ "client": request.get_client_host(), "tid": tid })
 		          )
 	#
-	except Exception as handled_exception:
-	#
-		LogLine.error(handled_exception, context = "pas_http_site")
-		_return = None
-	#
+	except Exception as handled_exception: LogLine.error(handled_exception, context = "pas_http_site")
 
 	if (_return == None):
 	#
@@ -130,6 +126,8 @@ Called for requests with the path prefix "/tasks/".
 
 	# pylint: disable=broad-except
 
+	_return = None
+
 	tid = request.get_dsd("tid")
 
 	try:
@@ -139,11 +137,7 @@ Called for requests with the path prefix "/tasks/".
 		           Hook.call("dNG.pas.Tasks.call", client = request.get_client_host(), tid = tid)
 		          )
 	#
-	except Exception as handled_exception:
-	#
-		LogLine.error(handled_exception, context = "pas_http_site")
-		_return = None
-	#
+	except Exception as handled_exception: LogLine.error(handled_exception, context = "pas_http_site")
 
 	if (_return == None):
 	#
