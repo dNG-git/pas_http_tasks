@@ -39,6 +39,7 @@ from dNG.pas.data.logging.log_line import LogLine
 from dNG.pas.data.tasks.database import Database as DatabaseTasks
 from dNG.pas.data.tasks.memory import Memory as MemoryTasks
 from dNG.pas.plugins.hook import Hook
+from dNG.pas.runtime.exception_log_trap import ExceptionLogTrap
 
 def call_database_task(request, virtual_config):
 #
@@ -52,20 +53,17 @@ Called for requests with the path prefix "/tasks.d/".
 :since:  v0.1.00
 	"""
 
-	# pylint: disable=broad-except
-
 	_return = None
 
 	tid = request.get_dsd("tid")
 
-	try:
+	with ExceptionLogTrap("pas_http_site"):
 	#
 		_return = (None
 		           if (tid == None) else
 		           DatabaseTasks.get_instance().call({ "client": request.get_client_host(), "tid": tid })
 		          )
 	#
-	except Exception as handled_exception: LogLine.error(handled_exception, context = "pas_http_site")
 
 	if (_return == None):
 	#
@@ -88,20 +86,17 @@ Called for requests with the path prefix "/tasks.m/".
 :since:  v0.1.00
 	"""
 
-	# pylint: disable=broad-except
-
 	_return = None
 
 	tid = request.get_dsd("tid")
 
-	try:
+	with ExceptionLogTrap("pas_http_site"):
 	#
 		_return = (None
 		           if (tid == None) else
 		           MemoryTasks.get_instance().call({ "client": request.get_client_host(), "tid": tid })
 		          )
 	#
-	except Exception as handled_exception: LogLine.error(handled_exception, context = "pas_http_site")
 
 	if (_return == None):
 	#
@@ -124,20 +119,17 @@ Called for requests with the path prefix "/tasks/".
 :since:  v0.1.00
 	"""
 
-	# pylint: disable=broad-except
-
 	_return = None
 
 	tid = request.get_dsd("tid")
 
-	try:
+	with ExceptionLogTrap("pas_http_site"):
 	#
 		_return = (None
 		           if (tid == None) else
 		           Hook.call("dNG.pas.Tasks.call", client = request.get_client_host(), tid = tid)
 		          )
 	#
-	except Exception as handled_exception: LogLine.error(handled_exception, context = "pas_http_site")
 
 	if (_return == None):
 	#
