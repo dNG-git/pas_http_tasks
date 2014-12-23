@@ -60,12 +60,12 @@ Called for requests with the path prefix "/tasks.d/".
 	with ExceptionLogTrap("pas_http_site"):
 	#
 		_return = (None
-		           if (tid == None) else
+		           if (tid is None) else
 		           DatabaseTasks.get_instance().call({ "client": request.get_client_host(), "tid": tid })
 		          )
 	#
 
-	if (_return == None):
+	if (_return is None):
 	#
 		LogLine.warning("pas.Tasks.database_call refused TID '{0}'", tid, context = "pas_http_site")
 		_return = handle_task_result_none()
@@ -93,12 +93,12 @@ Called for requests with the path prefix "/tasks.m/".
 	with ExceptionLogTrap("pas_http_site"):
 	#
 		_return = (None
-		           if (tid == None) else
+		           if (tid is None) else
 		           MemoryTasks.get_instance().call({ "client": request.get_client_host(), "tid": tid })
 		          )
 	#
 
-	if (_return == None):
+	if (_return is None):
 	#
 		LogLine.warning("pas.Tasks.memory_call refused TID '{0}'", tid, context = "pas_http_site")
 		_return = handle_task_result_none()
@@ -126,12 +126,12 @@ Called for requests with the path prefix "/tasks/".
 	with ExceptionLogTrap("pas_http_site"):
 	#
 		_return = (None
-		           if (tid == None) else
+		           if (tid is None) else
 		           Hook.call("dNG.pas.Tasks.call", client = request.get_client_host(), tid = tid)
 		          )
 	#
 
-	if (_return == None):
+	if (_return is None):
 	#
 		LogLine.warning("pas.Tasks.call refused TID '{0}'", tid, context = "pas_http_site")
 		_return = handle_task_result_none()
