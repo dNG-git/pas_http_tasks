@@ -51,8 +51,11 @@ from os import path
 
 with TemporaryDirectory(dir = ".") as build_directory:
 #
-	parameters = { "pasHttpTasksVersion": get_version() }
+	parameters = { "install_data_plain_copy_extensions": "json,tsc",
+	               "pasHttpTasksVersion": get_version()
+	             }
 
+	InstallData.add_install_data_callback(InstallData.plain_copy, [ "data", "lang" ])
 	InstallData.set_build_target_path(build_directory)
 	InstallData.set_build_target_parameters(parameters)
 

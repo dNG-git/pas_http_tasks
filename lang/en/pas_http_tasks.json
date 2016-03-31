@@ -1,0 +1,18 @@
+{
+ "pas_http_tasks_database_entries_count": "Database entries",
+ "pas_http_tasks_database_entries_list": "Database tasks list",
+ "pas_http_tasks_entry_details": "Details",
+ "pas_http_tasks_entry_status": "Status",
+ "pas_http_tasks_entry_status_completed": "Completed",
+ "pas_http_tasks_entry_status_failed": "Failed",
+ "pas_http_tasks_entry_status_queued": "Queued",
+ "pas_http_tasks_entry_status_running": "Running",
+ "pas_http_tasks_entry_status_waiting": "Waiting",
+ "pas_http_tasks_entry_time_started_1": "Started at ",
+ "pas_http_tasks_entry_time_started_2": "",
+ "pas_http_tasks_entry_time_scheduled": "Execution time scheduled",
+ "pas_http_tasks_entry_time_updated_1": "Last updated at ",
+ "pas_http_tasks_entry_time_updated_2": "",
+ "pas_http_tasks_entry_timeout_1": "Times out at ",
+ "pas_http_tasks_entry_timeout_2": ""
+}

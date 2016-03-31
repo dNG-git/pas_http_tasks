@@ -1,0 +1,18 @@
+{
+ "pas_http_tasks_database_entries_count": "Datenbankeinträge",
+ "pas_http_tasks_database_entries_list": "Datenbankliste der Aufgaben",
+ "pas_http_tasks_entry_details": "Details",
+ "pas_http_tasks_entry_status": "Status",
+ "pas_http_tasks_entry_status_completed": "Abgeschlossen",
+ "pas_http_tasks_entry_status_failed": "Fehlgeschlagen",
+ "pas_http_tasks_entry_status_queued": "Anstehend",
+ "pas_http_tasks_entry_status_running": "Ausführend",
+ "pas_http_tasks_entry_status_waiting": "Wartend",
+ "pas_http_tasks_entry_time_started_1": "Startzeitpunkt war am ",
+ "pas_http_tasks_entry_time_started_2": "",
+ "pas_http_tasks_entry_time_scheduled": "Geplanter Ausführungszeitpunkt",
+ "pas_http_tasks_entry_time_updated_1": "Zuletzt aktualisiert am ",
+ "pas_http_tasks_entry_time_updated_2": "",
+ "pas_http_tasks_entry_timeout_1": "Läuft am ",
+ "pas_http_tasks_entry_timeout_2": " ab"
+}

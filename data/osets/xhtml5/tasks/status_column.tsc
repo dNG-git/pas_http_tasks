@@ -1,0 +1,9 @@
+<div>
+	<strong>[rewrite:content]status[/rewrite]</strong>
+[if:content:time_started != ]
+	<br /><small>[rewrite:l10n]pas_http_tasks_entry_time_started_1[/rewrite]<strong>[rewrite:timestamp:date_time_short]time_started[/rewrite]</strong>[rewrite:l10n]pas_http_tasks_entry_time_started_2[/rewrite]</small>
+[/if]
+[if:content:timeout != ]
+	<br /><small>[rewrite:l10n]pas_http_tasks_entry_timeout_1[/rewrite]<strong>[rewrite:timestamp:date_time_short]timeout[/rewrite]</strong>[rewrite:l10n]pas_http_tasks_entry_timeout_2[/rewrite]</small>
+[/if]
+</div>

@@ -1,0 +1,11 @@
+<div class="pagecontent_tasks pagecontent_tasks_list">
+	<div class="pagecontent_box pagecontent_box_infoblock">
+		<div>[rewrite:l10n]pas_http_tasks_database_entries_count[/rewrite] <em>[rewrite:content]tasks_count[/rewrite]</em></div>
+	</div>
+	<h1>[rewrite:content]title[/rewrite]</h1>
+[if:content:tasks != ]
+[block:content:tasks]output.DatabaseTable.render[/block]
+[/if][if:content:tasks == ]
+<p><strong>[rewrite:l10n]pas_http_tasks_database_entries_list_empty[/rewrite]</strong></p>
+[/if]
+</div>
