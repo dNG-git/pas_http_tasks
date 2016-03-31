@@ -190,10 +190,10 @@ Returns content used for the "size" cell rendering.
 		_return = content
 
 		if (content['status'] == DatabaseTask.STATUS_WAITING): _return['status'] = L10n.get("pas_http_tasks_entry_status_waiting")
-		if (content['status'] == DatabaseTask.STATUS_QUEUED): _return['status'] = L10n.get("pas_http_tasks_entry_status_queued")
-		if (content['status'] == DatabaseTask.STATUS_RUNNING): _return['status'] = L10n.get("pas_http_tasks_entry_status_running")
-		if (content['status'] == DatabaseTask.STATUS_COMPLETED): _return['status'] = L10n.get("pas_http_tasks_entry_status_completed")
-		if (content['status'] == DatabaseTask.STATUS_FAILED): _return['status'] = L10n.get("pas_http_tasks_entry_status_failed")
+		elif (content['status'] == DatabaseTask.STATUS_QUEUED): _return['status'] = L10n.get("pas_http_tasks_entry_status_queued")
+		elif (content['status'] == DatabaseTask.STATUS_RUNNING): _return['status'] = L10n.get("pas_http_tasks_entry_status_running")
+		elif (content['status'] == DatabaseTask.STATUS_COMPLETED): _return['status'] = L10n.get("pas_http_tasks_entry_status_completed")
+		elif (content['status'] == DatabaseTask.STATUS_FAILED): _return['status'] = L10n.get("pas_http_tasks_entry_status_failed")
 		else: _return['status'] = L10n.get("core_unknown_entity")
 
 		if (content['time_started'] < 1): _return['time_started'] = None
