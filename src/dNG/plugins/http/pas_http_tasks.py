@@ -33,13 +33,13 @@ https://www.direct-netware.de/redirect?licenses;gpl
 
 # pylint: disable=unused-argument
 
-from dNG.pas.controller.predefined_http_request import PredefinedHttpRequest
-from dNG.pas.data.http.virtual_config import VirtualConfig
-from dNG.pas.data.logging.log_line import LogLine
-from dNG.pas.data.tasks.database import Database as DatabaseTasks
-from dNG.pas.data.tasks.memory import Memory as MemoryTasks
-from dNG.pas.plugins.hook import Hook
-from dNG.pas.runtime.exception_log_trap import ExceptionLogTrap
+from dNG.controller.predefined_http_request import PredefinedHttpRequest
+from dNG.data.http.virtual_config import VirtualConfig
+from dNG.data.logging.log_line import LogLine
+from dNG.data.tasks.database import Database as DatabaseTasks
+from dNG.data.tasks.memory import Memory as MemoryTasks
+from dNG.plugins.hook import Hook
+from dNG.runtime.exception_log_trap import ExceptionLogTrap
 
 def call_database_task(request, virtual_config):
 #
@@ -50,7 +50,7 @@ Called for requests with the path prefix "/tasks.d/".
 :param virtual_config: Virtual path configuration
 
 :return: (object) Request object if valid
-:since:  v0.1.00
+:since:  v0.2.00
 	"""
 
 	_return = None
@@ -83,7 +83,7 @@ Called for requests with the path prefix "/tasks.m/".
 :param virtual_config: Virtual path configuration
 
 :return: (object) Request object if valid
-:since:  v0.1.00
+:since:  v0.2.00
 	"""
 
 	_return = None
@@ -116,7 +116,7 @@ Called for requests with the path prefix "/tasks/".
 :param virtual_config: Virtual path configuration
 
 :return: (object) Request object if valid
-:since:  v0.1.00
+:since:  v0.2.00
 	"""
 
 	_return = None
@@ -146,7 +146,7 @@ def handle_task_result_none():
 Returns an HTTP 400 error request if no task matched.
 
 :return: (object) Request object
-:since:  v0.1.00
+:since:  v0.2.00
 	"""
 
 	_return = PredefinedHttpRequest()
@@ -163,7 +163,7 @@ def register_plugin():
 	"""
 Register plugin hooks.
 
-:since: v0.1.00
+:since: v0.2.00
 	"""
 
 	Hook.register("dNG.pas.http.Server.onStartup", on_startup)
@@ -179,7 +179,7 @@ Called for "dNG.pas.http.Server.onStartup" and "dNG.pas.http.Wsgi.onStartup"
 :param last_return: The return value from the last hook called.
 
 :return: (mixed) Return value
-:since:  v0.1.00
+:since:  v0.2.00
 	"""
 
 	VirtualConfig.set_virtual_path("/tasks/", { "path": "tid" }, call_task)
@@ -193,7 +193,7 @@ def unregister_plugin():
 	"""
 Unregister plugin hooks.
 
-:since: v0.1.00
+:since: v0.2.00
 	"""
 
 	Hook.unregister("dNG.pas.http.Server.onStartup", on_startup)

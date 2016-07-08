@@ -33,12 +33,13 @@ https://www.direct-netware.de/redirect?licenses;gpl
 
 from math import ceil
 
-from dNG.pas.data.hookable_settings import HookableSettings
-from dNG.pas.data.http.translatable_error import TranslatableError
-from dNG.pas.data.tasks.database_task import DatabaseTask
-from dNG.pas.data.text.input_filter import InputFilter
-from dNG.pas.data.text.l10n import L10n
-from dNG.pas.data.xhtml.table.custom import Custom as CustomTable
+from dNG.data.hookable_settings import HookableSettings
+from dNG.data.http.translatable_error import TranslatableError
+from dNG.data.tasks.database_task import DatabaseTask
+from dNG.data.text.input_filter import InputFilter
+from dNG.data.text.l10n import L10n
+from dNG.data.xhtml.table.custom import Custom as CustomTable
+
 from .module import Module
 
 class Index(Module):
@@ -46,11 +47,11 @@ class Index(Module):
 	"""
 Service for "m=tasks"
 
-:author:     direct Netware Group
+:author:     direct Netware Group et al.
 :copyright:  (C) direct Netware Group - All rights reserved
 :package:    pas.http
 :subpackage: tasks
-:since:      v0.1.02
+:since:      v0.2.00
 :license:    https://www.direct-netware.de/redirect?licenses;gpl
              GNU General Public License 2
 	"""
@@ -60,7 +61,7 @@ Service for "m=tasks"
 		"""
 Action for "index"
 
-:since: v0.1.02
+:since: v0.2.00
 		"""
 
 		if (self.request.is_dsd_set("tid")): self.execute_view()
@@ -72,7 +73,7 @@ Action for "index"
 		"""
 Action for "list"
 
-:since: v0.1.02
+:since: v0.2.00
 		"""
 
 		page = InputFilter.filter_int(self.request.get_dsd("tpage", 1))
@@ -160,7 +161,7 @@ Returns content used for the "details" cell rendering.
 :param column_definition: Column definition for the cell
 
 :return: (dict) Content used for rendering
-:since:  v1.0.02
+:since:  v0.2.00
 		"""
 
 		_return = content
@@ -184,7 +185,7 @@ Returns content used for the "size" cell rendering.
 :param column_definition: Column definition for the cell
 
 :return: (dict) Content used for rendering
-:since:  v1.0.02
+:since:  v0.2.00
 		"""
 
 		_return = content
