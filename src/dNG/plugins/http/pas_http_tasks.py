@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-##j## BOF
 
 """
 direct PAS
@@ -42,8 +41,7 @@ from dNG.plugins.hook import Hook
 from dNG.runtime.exception_log_trap import ExceptionLogTrap
 
 def call_database_task(request, virtual_config):
-#
-	"""
+    """
 Called for requests with the path prefix "/tasks.d/".
 
 :param request: Originating request instance
@@ -51,32 +49,29 @@ Called for requests with the path prefix "/tasks.d/".
 
 :return: (object) Request object if valid
 :since:  v0.2.00
-	"""
+    """
 
-	_return = None
+    _return = None
 
-	tid = request.get_dsd("tid")
+    tid = request.get_dsd("tid")
 
-	with ExceptionLogTrap("pas_http_site"):
-	#
-		_return = (None
-		           if (tid is None) else
-		           DatabaseTasks.get_instance().call({ "client": request.get_client_host(), "tid": tid })
-		          )
-	#
+    with ExceptionLogTrap("pas_http_site"):
+        _return = (None
+                   if (tid is None) else
+                   DatabaseTasks.get_instance().call({ "client": request.get_client_host(), "tid": tid })
+                  )
+    #
 
-	if (_return is None):
-	#
-		LogLine.warning("pas.Tasks.database_call refused TID '{0}'", tid, context = "pas_http_site")
-		_return = handle_task_result_none()
-	#
+    if (_return is None):
+        LogLine.warning("pas.Tasks.database_call refused TID '{0}'", tid, context = "pas_http_site")
+        _return = handle_task_result_none()
+    #
 
-	return _return
+    return _return
 #
 
 def call_memory_task(request, virtual_config):
-#
-	"""
+    """
 Called for requests with the path prefix "/tasks.m/".
 
 :param request: Originating request instance
@@ -84,32 +79,29 @@ Called for requests with the path prefix "/tasks.m/".
 
 :return: (object) Request object if valid
 :since:  v0.2.00
-	"""
+    """
 
-	_return = None
+    _return = None
 
-	tid = request.get_dsd("tid")
+    tid = request.get_dsd("tid")
 
-	with ExceptionLogTrap("pas_http_site"):
-	#
-		_return = (None
-		           if (tid is None) else
-		           MemoryTasks.get_instance().call({ "client": request.get_client_host(), "tid": tid })
-		          )
-	#
+    with ExceptionLogTrap("pas_http_site"):
+        _return = (None
+                   if (tid is None) else
+                   MemoryTasks.get_instance().call({ "client": request.get_client_host(), "tid": tid })
+                  )
+    #
 
-	if (_return is None):
-	#
-		LogLine.warning("pas.Tasks.memory_call refused TID '{0}'", tid, context = "pas_http_site")
-		_return = handle_task_result_none()
-	#
+    if (_return is None):
+        LogLine.warning("pas.Tasks.memory_call refused TID '{0}'", tid, context = "pas_http_site")
+        _return = handle_task_result_none()
+    #
 
-	return _return
+    return _return
 #
 
 def call_task(request, virtual_config):
-#
-	"""
+    """
 Called for requests with the path prefix "/tasks/".
 
 :param request: Originating request instance
@@ -117,62 +109,57 @@ Called for requests with the path prefix "/tasks/".
 
 :return: (object) Request object if valid
 :since:  v0.2.00
-	"""
+    """
 
-	_return = None
+    _return = None
 
-	tid = request.get_dsd("tid")
+    tid = request.get_dsd("tid")
 
-	with ExceptionLogTrap("pas_http_site"):
-	#
-		_return = (None
-		           if (tid is None) else
-		           Hook.call("dNG.pas.Tasks.call", client = request.get_client_host(), tid = tid)
-		          )
-	#
+    with ExceptionLogTrap("pas_http_site"):
+        _return = (None
+                   if (tid is None) else
+                   Hook.call("dNG.pas.Tasks.call", client = request.get_client_host(), tid = tid)
+                  )
+    #
 
-	if (_return is None):
-	#
-		LogLine.warning("pas.Tasks.call refused TID '{0}'", tid, context = "pas_http_site")
-		_return = handle_task_result_none()
-	#
+    if (_return is None):
+        LogLine.warning("pas.Tasks.call refused TID '{0}'", tid, context = "pas_http_site")
+        _return = handle_task_result_none()
+    #
 
-	return _return
+    return _return
 #
 
 def handle_task_result_none():
-#
-	"""
+    """
 Returns an HTTP 400 error request if no task matched.
 
 :return: (object) Request object
 :since:  v0.2.00
-	"""
+    """
 
-	_return = PredefinedHttpRequest()
-	_return.set_module("output")
-	_return.set_service("http")
-	_return.set_action("error")
-	_return.set_dsd("code", "400")
+    _return = PredefinedHttpRequest()
+    _return.set_module("output")
+    _return.set_service("http")
+    _return.set_action("error")
+    _return.set_dsd("code", "400")
 
-	return _return
+    return _return
 #
 
 def register_plugin():
-#
-	"""
+    """
 Register plugin hooks.
 
 :since: v0.2.00
-	"""
+    """
 
-	Hook.register("dNG.pas.http.Server.onStartup", on_startup)
-	Hook.register("dNG.pas.http.Wsgi.onStartup", on_startup)
+    Hook.register("dNG.pas.http.Server.onStartup", on_startup)
+    Hook.register("dNG.pas.http.Wsgi.onStartup", on_startup)
 #
 
 def on_startup(params, last_return = None):
-#
-	"""
+    """
 Called for "dNG.pas.http.Server.onStartup" and "dNG.pas.http.Wsgi.onStartup"
 
 :param params: Parameter specified
@@ -180,24 +167,21 @@ Called for "dNG.pas.http.Server.onStartup" and "dNG.pas.http.Wsgi.onStartup"
 
 :return: (mixed) Return value
 :since:  v0.2.00
-	"""
+    """
 
-	VirtualConfig.set_virtual_path("/tasks/", { "path": "tid" }, call_task)
-	VirtualConfig.set_virtual_path("/tasks.d/", { "path": "tid" }, call_database_task)
-	VirtualConfig.set_virtual_path("/tasks.m/", { "path": "tid" }, call_memory_task)
-	return last_return
+    VirtualConfig.set_virtual_path("/tasks/", { "path": "tid" }, call_task)
+    VirtualConfig.set_virtual_path("/tasks.d/", { "path": "tid" }, call_database_task)
+    VirtualConfig.set_virtual_path("/tasks.m/", { "path": "tid" }, call_memory_task)
+    return last_return
 #
 
 def unregister_plugin():
-#
-	"""
+    """
 Unregister plugin hooks.
 
 :since: v0.2.00
-	"""
+    """
 
-	Hook.unregister("dNG.pas.http.Server.onStartup", on_startup)
-	Hook.unregister("dNG.pas.http.Wsgi.onStartup", on_startup)
+    Hook.unregister("dNG.pas.http.Server.onStartup", on_startup)
+    Hook.unregister("dNG.pas.http.Wsgi.onStartup", on_startup)
 #
-
-##j## EOF
